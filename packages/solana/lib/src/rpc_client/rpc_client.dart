@@ -41,9 +41,9 @@ part 'rpc_client_extensions.dart';
 class RPCClient {
   /// Constructs a SolanaClient that is capable of sending various RPCs to
   /// [rpcUrl].
-  RPCClient(String rpcUrl) : client = JsonRpcClient(rpcUrl);
+  RPCClient(String rpcUrl) : _jsonRpcClient = JsonRpcClient(rpcUrl);
 
-  final JsonRpcClient client;
+  final JsonRpcClient _jsonRpcClient;
 
   /// Returns the recent blockhash from the ledger, and a fee schedule that
   /// can be used to compute the cost of submitting transaction with
@@ -56,7 +56,7 @@ class RPCClient {
   Future<Blockhash> getRecentBlockhash({
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getRecentBlockhash',
       params: <dynamic>[
         if (commitment != null)
@@ -78,7 +78,7 @@ class RPCClient {
     String address, {
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getBalance',
       params: <dynamic>[
         address,
@@ -102,7 +102,7 @@ class RPCClient {
     String address, {
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getAccountInfo',
       params: <dynamic>[
         address,
@@ -126,7 +126,7 @@ class RPCClient {
     String encodedTransaction, {
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'sendTransaction',
       params: <dynamic>[
         encodedTransaction,
@@ -150,7 +150,7 @@ class RPCClient {
     String transaction, {
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'simulateTransaction',
       params: <dynamic>[
         transaction,
@@ -171,7 +171,8 @@ class RPCClient {
     required int lamports,
     Commitment? commitment,
   }) async {
-    final data = await client.request('requestAirdrop', params: <dynamic>[
+    final data =
+        await _jsonRpcClient.request('requestAirdrop', params: <dynamic>[
       address,
       lamports.toInt(),
       if (commitment != null)
@@ -201,7 +202,7 @@ class RPCClient {
     String? until,
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getConfirmedSignaturesForAddress2',
       params: <dynamic>[
         address,
@@ -228,7 +229,7 @@ class RPCClient {
     String signature, {
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getConfirmedTransaction',
       params: <dynamic>[
         signature,
@@ -253,7 +254,7 @@ class RPCClient {
     String signature, {
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getTransaction',
       params: <dynamic>[
         signature.toString(),
@@ -277,7 +278,7 @@ class RPCClient {
     String tokenMintAddress, {
     Commitment commitment = Commitment.confirmed,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getTokenSupply',
       params: <dynamic>[
         tokenMintAddress,
@@ -298,7 +299,7 @@ class RPCClient {
     List<TransactionSignature> signatures, {
     bool searchTransactionHistory = false,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getSignatureStatuses',
       params: <dynamic>[
         [
@@ -325,7 +326,7 @@ class RPCClient {
     int size, {
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getMinimumBalanceForRentExemption',
       params: <dynamic>[
         size,
@@ -342,7 +343,7 @@ class RPCClient {
     required String associatedTokenAccountAddress,
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getTokenAccountBalance',
       params: <dynamic>[
         associatedTokenAccountAddress,
@@ -367,7 +368,7 @@ class RPCClient {
     String? programId,
     Commitment? commitment,
   }) async {
-    final data = await client.request(
+    final data = await _jsonRpcClient.request(
       'getTokenAccountsByOwner',
       params: <dynamic>[
         owner,
