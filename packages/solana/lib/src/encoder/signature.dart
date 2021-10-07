@@ -3,6 +3,7 @@ import 'package:solana/src/base58/encode.dart';
 import 'package:solana/src/common/byte_array.dart';
 
 class Signature extends ByteArray {
+  Signature.fromBytes(List<int> bytes) : _data = bytes;
   Signature.from(crypto.Signature signature) : _data = signature.bytes;
 
   final ByteArray _data;

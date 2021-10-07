@@ -21,7 +21,7 @@ import 'package:solana/src/spl_token/token_amount.dart';
 import 'package:solana/src/spl_token/token_supply.dart';
 import 'package:solana/src/utils.dart';
 
-export 'account.dart' show Account;
+export 'account.dart' show Account, SplTokenAccountData;
 export 'blockhash.dart' show Blockhash;
 export 'commitment.dart' show Commitment;
 export 'confirmed_signature.dart' show ConfirmedSignature;
@@ -34,6 +34,7 @@ export 'parsed_system_instruction.dart';
 export 'signature_status.dart' show SignatureStatus, TxStatus;
 export 'transaction.dart' show Transaction;
 export 'transaction_response.dart';
+export 'transaction_signature.dart';
 
 part 'rpc_client_extensions.dart';
 

@@ -1,7 +1,9 @@
 export 'src/associated_token_account_program/associated_token_account_program.dart';
+export 'src/base58/decode.dart';
+export 'src/base58/encode.dart';
 export 'src/crypto/ed25519_hd_keypair.dart';
 export 'src/encoder/encoder.dart'
-    show Instruction, Message, Buffer, AccountMeta, SignedTx;
+    show Instruction, Message, Buffer, AccountMeta, SignedTx, Signature;
 export 'src/exceptions/bad_state_exception.dart';
 export 'src/exceptions/http_exception.dart';
 export 'src/exceptions/json_rpc_exception.dart';

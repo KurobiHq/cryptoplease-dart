@@ -34,8 +34,10 @@ class Account {
 }
 
 @JsonSerializable(createToJson: false)
-class AccountInfoResponse extends JsonRpcResponse<ValueResponse<Account>> {
-  AccountInfoResponse(ValueResponse<Account> result) : super(result: result);
+class AccountInfoResponse
+    extends JsonRpcResponse<NullableValueResponse<Account>> {
+  AccountInfoResponse(NullableValueResponse<Account> result)
+      : super(result: result);
 
   factory AccountInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$AccountInfoResponseFromJson(json);
