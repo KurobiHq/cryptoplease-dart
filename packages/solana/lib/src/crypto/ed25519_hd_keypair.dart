@@ -23,6 +23,22 @@ class Ed25519HDKeyPair extends KeyPair {
         // over and over because it's needed often.
         address = base58encode(publicKey);
 
+  /// Creates and initializes a new SolanaWallet for the given [keyPair]
+  ///
+  static Future<Ed25519HDKeyPair> fromKeyPair(KeyPair keyPair) async {
+    final publicKey = await keyPair.extractPublicKey();
+    if (publicKey is SimplePublicKey) {
+      // Finally, create a new wallet
+      final keydata = await keyPair.extract() as SimpleKeyPairData;
+      return Ed25519HDKeyPair._(
+        keyData: KeyData(key: keydata.bytes, chainCode: []),
+        publicKey: publicKey.bytes,
+      );
+    } else {
+      throw Exception('could not build a key pair');
+    }
+  }
+
   /// Construct a new [Ed25519HDKeyPair] from a [seed] and a derivation path [hdPath].
   static Future<Ed25519HDKeyPair> fromSeedWithHdPath({
     required List<int> seed,
