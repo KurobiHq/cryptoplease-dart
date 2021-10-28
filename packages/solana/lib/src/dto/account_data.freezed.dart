@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'account.dart';
+part of 'account_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -173,14 +173,14 @@ class _$BinaryAccountData implements BinaryAccountData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is BinaryAccountData &&
-            (identical(other.bytes, bytes) ||
-                const DeepCollectionEquality().equals(other.bytes, bytes)));
+        (other.runtimeType == runtimeType &&
+            other is BinaryAccountData &&
+            const DeepCollectionEquality().equals(other.bytes, bytes));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(bytes);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(bytes));
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +271,7 @@ class _$BinaryAccountData implements BinaryAccountData {
 abstract class BinaryAccountData implements AccountData {
   const factory BinaryAccountData(List<int> bytes) = _$BinaryAccountData;
 
-  List<int> get bytes => throw _privateConstructorUsedError;
+  List<int> get bytes;
   @JsonKey(ignore: true)
   $BinaryAccountDataCopyWith<BinaryAccountData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -325,14 +325,13 @@ class _$StringAccountData implements StringAccountData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is StringAccountData &&
-            (identical(other.string, string) ||
-                const DeepCollectionEquality().equals(other.string, string)));
+        (other.runtimeType == runtimeType &&
+            other is StringAccountData &&
+            (identical(other.string, string) || other.string == string));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(string);
+  int get hashCode => Object.hash(runtimeType, string);
 
   @JsonKey(ignore: true)
   @override
@@ -423,7 +422,7 @@ class _$StringAccountData implements StringAccountData {
 abstract class StringAccountData implements AccountData {
   const factory StringAccountData(String string) = _$StringAccountData;
 
-  String get string => throw _privateConstructorUsedError;
+  String get string;
   @JsonKey(ignore: true)
   $StringAccountDataCopyWith<StringAccountData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -460,7 +459,8 @@ class _$EmptyAccountData implements EmptyAccountData {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is EmptyAccountData);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is EmptyAccountData);
   }
 
   @override
@@ -599,14 +599,13 @@ class _$SplTokenAccountData implements SplTokenAccountData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is SplTokenAccountData &&
-            (identical(other.parsed, parsed) ||
-                const DeepCollectionEquality().equals(other.parsed, parsed)));
+        (other.runtimeType == runtimeType &&
+            other is SplTokenAccountData &&
+            (identical(other.parsed, parsed) || other.parsed == parsed));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(parsed);
+  int get hashCode => Object.hash(runtimeType, parsed);
 
   @JsonKey(ignore: true)
   @override
@@ -698,7 +697,7 @@ abstract class SplTokenAccountData implements AccountData {
   const factory SplTokenAccountData(ParsedSplTokenAccountData parsed) =
       _$SplTokenAccountData;
 
-  ParsedSplTokenAccountData get parsed => throw _privateConstructorUsedError;
+  ParsedSplTokenAccountData get parsed;
   @JsonKey(ignore: true)
   $SplTokenAccountDataCopyWith<SplTokenAccountData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -752,14 +751,14 @@ class _$GenericAccountData implements GenericAccountData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is GenericAccountData &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)));
+        (other.runtimeType == runtimeType &&
+            other is GenericAccountData &&
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(data);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override
@@ -851,7 +850,7 @@ abstract class GenericAccountData implements AccountData {
   const factory GenericAccountData(Map<String, dynamic> data) =
       _$GenericAccountData;
 
-  Map<String, dynamic> get data => throw _privateConstructorUsedError;
+  Map<String, dynamic> get data;
   @JsonKey(ignore: true)
   $GenericAccountDataCopyWith<GenericAccountData> get copyWith =>
       throw _privateConstructorUsedError;

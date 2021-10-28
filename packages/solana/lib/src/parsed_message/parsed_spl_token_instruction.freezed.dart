@@ -42,7 +42,7 @@ class _$ParsedSplTokenInstructionTearOff {
     );
   }
 
-  ParsedSplTokenInstruction fromJson(Map<String, Object> json) {
+  ParsedSplTokenInstruction fromJson(Map<String, Object?> json) {
     return ParsedSplTokenInstruction.fromJson(json);
   }
 }
@@ -209,18 +209,14 @@ class _$ParsedSplTokenTransferInstruction
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ParsedSplTokenTransferInstruction &&
-            (identical(other.info, info) ||
-                const DeepCollectionEquality().equals(other.info, info)) &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)));
+        (other.runtimeType == runtimeType &&
+            other is ParsedSplTokenTransferInstruction &&
+            (identical(other.info, info) || other.info == info) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(info) ^
-      const DeepCollectionEquality().hash(type);
+  int get hashCode => Object.hash(runtimeType, info, type);
 
   @JsonKey(ignore: true)
   @override
@@ -311,10 +307,9 @@ abstract class ParsedSplTokenTransferInstruction
   factory ParsedSplTokenTransferInstruction.fromJson(
       Map<String, dynamic> json) = _$ParsedSplTokenTransferInstruction.fromJson;
 
-  ParsedSplTokenTransferInformation get info =>
-      throw _privateConstructorUsedError;
+  ParsedSplTokenTransferInformation get info;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
   @JsonKey(ignore: true)
   $ParsedSplTokenTransferInstructionCopyWith<ParsedSplTokenTransferInstruction>
@@ -379,14 +374,13 @@ class _$ParsedSplTokenUnsupportedInstruction
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ParsedSplTokenUnsupportedInstruction &&
-            (identical(other.type, type) ||
-                const DeepCollectionEquality().equals(other.type, type)));
+        (other.runtimeType == runtimeType &&
+            other is ParsedSplTokenUnsupportedInstruction &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(type);
+  int get hashCode => Object.hash(runtimeType, type);
 
   @JsonKey(ignore: true)
   @override
@@ -479,7 +473,7 @@ abstract class ParsedSplTokenUnsupportedInstruction
       _$ParsedSplTokenUnsupportedInstruction.fromJson;
 
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
   @JsonKey(ignore: true)
   $ParsedSplTokenUnsupportedInstructionCopyWith<
@@ -509,7 +503,7 @@ class _$ParsedSplTokenTransferInformationTearOff {
     );
   }
 
-  ParsedSplTokenTransferInformation fromJson(Map<String, Object> json) {
+  ParsedSplTokenTransferInformation fromJson(Map<String, Object?> json) {
     return ParsedSplTokenTransferInformation.fromJson(json);
   }
 }
@@ -662,26 +656,19 @@ class _$_ParsedSplTokenTransferInformation
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ParsedSplTokenTransferInformation &&
-            (identical(other.amount, amount) ||
-                const DeepCollectionEquality().equals(other.amount, amount)) &&
+        (other.runtimeType == runtimeType &&
+            other is _ParsedSplTokenTransferInformation &&
+            (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.authority, authority) ||
-                const DeepCollectionEquality()
-                    .equals(other.authority, authority)) &&
-            (identical(other.source, source) ||
-                const DeepCollectionEquality().equals(other.source, source)) &&
+                other.authority == authority) &&
+            (identical(other.source, source) || other.source == source) &&
             (identical(other.destination, destination) ||
-                const DeepCollectionEquality()
-                    .equals(other.destination, destination)));
+                other.destination == destination));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(amount) ^
-      const DeepCollectionEquality().hash(authority) ^
-      const DeepCollectionEquality().hash(source) ^
-      const DeepCollectionEquality().hash(destination);
+      Object.hash(runtimeType, amount, authority, source, destination);
 
   @JsonKey(ignore: true)
   @override
@@ -709,13 +696,13 @@ abstract class _ParsedSplTokenTransferInformation
       _$_ParsedSplTokenTransferInformation.fromJson;
 
   @override
-  String get amount => throw _privateConstructorUsedError;
+  String get amount;
   @override
-  String get authority => throw _privateConstructorUsedError;
+  String get authority;
   @override
-  String get source => throw _privateConstructorUsedError;
+  String get source;
   @override
-  String get destination => throw _privateConstructorUsedError;
+  String get destination;
   @override
   @JsonKey(ignore: true)
   _$ParsedSplTokenTransferInformationCopyWith<

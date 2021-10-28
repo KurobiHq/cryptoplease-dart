@@ -21,12 +21,6 @@ class NullableValueResponse<T> {
   final T? value;
 }
 
-T? _$nullableGenericFromJson<T>(
-  Object? input,
-  T Function(Object? json) fromJson,
-) =>
-    input == null ? null : fromJson(input);
-
 @JsonSerializable(genericArgumentFactories: true, createToJson: false)
 class ValueResponse<T> {
   ValueResponse({required this.value});
