@@ -1,18 +1,18 @@
-import 'package:solana/src/utils.dart';
+import 'package:solana/solana.dart';
 import 'package:test/test.dart';
 
 void main() {
   test('Throws for invalid base58 characters', () {
     expect(
-      () => isValidAddress('2gVkYWexTHR5Hb2aLeQN3tnngvWzisFKXDUPrgMHpdSl'),
-      throwsFormatException,
+      isValidAddress('2gVkYWexTHR5Hb2aLeQN3tnngvWzisFKXDUPrgMHpdSl'),
+      equals(false),
     );
   });
 
   test('Throws for invalid length', () {
     expect(
-      () => isValidAddress('2gVkYWexTHR5Hb2aLeQN3tnngvWzisFKXDUPrgMHpd'),
-      throwsFormatException,
+      isValidAddress('2gVkYWexTHR5Hb2aLeQN3tnngvWzisFKXDUPrgMHpd'),
+      equals(false),
     );
   });
 

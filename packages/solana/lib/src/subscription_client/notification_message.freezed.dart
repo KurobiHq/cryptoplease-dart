@@ -14,7 +14,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 NotificationMessage _$NotificationMessageFromJson(Map<String, dynamic> json) {
-  switch (json['method'] as String?) {
+  switch (json['method']) {
     case 'accountNotification':
       return AccountNotification.fromJson(json);
     case 'logsNotification':
@@ -195,10 +195,15 @@ class __$UnsupportedNotificationCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UnsupportedNotification extends _UnsupportedNotification {
-  const _$_UnsupportedNotification() : super._();
+  const _$_UnsupportedNotification({String? $type})
+      : $type = $type ?? 'unsupported',
+        super._();
 
   factory _$_UnsupportedNotification.fromJson(Map<String, dynamic> json) =>
       _$$_UnsupportedNotificationFromJson(json);
+
+  @JsonKey(name: 'method')
+  final String $type;
 
   @override
   String toString() {
@@ -308,7 +313,7 @@ class _$_UnsupportedNotification extends _UnsupportedNotification {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UnsupportedNotificationToJson(this)..['method'] = 'unsupported';
+    return _$$_UnsupportedNotificationToJson(this);
   }
 }
 
@@ -355,13 +360,18 @@ class _$AccountNotificationCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AccountNotification extends AccountNotification {
-  const _$AccountNotification({required this.params}) : super._();
+  const _$AccountNotification({required this.params, String? $type})
+      : $type = $type ?? 'accountNotification',
+        super._();
 
   factory _$AccountNotification.fromJson(Map<String, dynamic> json) =>
       _$$AccountNotificationFromJson(json);
 
   @override
   final NotificationParams<Account> params;
+
+  @JsonKey(name: 'method')
+  final String $type;
 
   @override
   String toString() {
@@ -373,11 +383,12 @@ class _$AccountNotification extends AccountNotification {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is AccountNotification &&
-            (identical(other.params, params) || other.params == params));
+            const DeepCollectionEquality().equals(other.params, params));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, params);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(params));
 
   @JsonKey(ignore: true)
   @override
@@ -478,8 +489,7 @@ class _$AccountNotification extends AccountNotification {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AccountNotificationToJson(this)
-      ..['method'] = 'accountNotification';
+    return _$$AccountNotificationToJson(this);
   }
 }
 
@@ -532,13 +542,18 @@ class _$LogsNotificationCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LogsNotification extends LogsNotification {
-  const _$LogsNotification({required this.params}) : super._();
+  const _$LogsNotification({required this.params, String? $type})
+      : $type = $type ?? 'logsNotification',
+        super._();
 
   factory _$LogsNotification.fromJson(Map<String, dynamic> json) =>
       _$$LogsNotificationFromJson(json);
 
   @override
   final NotificationParams<Logs> params;
+
+  @JsonKey(name: 'method')
+  final String $type;
 
   @override
   String toString() {
@@ -550,11 +565,12 @@ class _$LogsNotification extends LogsNotification {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is LogsNotification &&
-            (identical(other.params, params) || other.params == params));
+            const DeepCollectionEquality().equals(other.params, params));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, params);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(params));
 
   @JsonKey(ignore: true)
   @override
@@ -655,7 +671,7 @@ class _$LogsNotification extends LogsNotification {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LogsNotificationToJson(this)..['method'] = 'logsNotification';
+    return _$$LogsNotificationToJson(this);
   }
 }
 
@@ -708,13 +724,18 @@ class _$ProgramNotificationCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ProgramNotification extends ProgramNotification {
-  const _$ProgramNotification({required this.params}) : super._();
+  const _$ProgramNotification({required this.params, String? $type})
+      : $type = $type ?? 'programNotification',
+        super._();
 
   factory _$ProgramNotification.fromJson(Map<String, dynamic> json) =>
       _$$ProgramNotificationFromJson(json);
 
   @override
   final NotificationParams<dynamic> params;
+
+  @JsonKey(name: 'method')
+  final String $type;
 
   @override
   String toString() {
@@ -726,11 +747,12 @@ class _$ProgramNotification extends ProgramNotification {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ProgramNotification &&
-            (identical(other.params, params) || other.params == params));
+            const DeepCollectionEquality().equals(other.params, params));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, params);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(params));
 
   @JsonKey(ignore: true)
   @override
@@ -831,8 +853,7 @@ class _$ProgramNotification extends ProgramNotification {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProgramNotificationToJson(this)
-      ..['method'] = 'programNotification';
+    return _$$ProgramNotificationToJson(this);
   }
 }
 
@@ -885,13 +906,18 @@ class _$SignatureNotificationCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SignatureNotification extends SignatureNotification {
-  const _$SignatureNotification({required this.params}) : super._();
+  const _$SignatureNotification({required this.params, String? $type})
+      : $type = $type ?? 'signatureNotification',
+        super._();
 
   factory _$SignatureNotification.fromJson(Map<String, dynamic> json) =>
       _$$SignatureNotificationFromJson(json);
 
   @override
   final NotificationParams<OptionalError> params;
+
+  @JsonKey(name: 'method')
+  final String $type;
 
   @override
   String toString() {
@@ -903,11 +929,12 @@ class _$SignatureNotification extends SignatureNotification {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SignatureNotification &&
-            (identical(other.params, params) || other.params == params));
+            const DeepCollectionEquality().equals(other.params, params));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, params);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(params));
 
   @JsonKey(ignore: true)
   @override
@@ -1009,8 +1036,7 @@ class _$SignatureNotification extends SignatureNotification {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SignatureNotificationToJson(this)
-      ..['method'] = 'signatureNotification';
+    return _$$SignatureNotificationToJson(this);
   }
 }
 
@@ -1064,13 +1090,18 @@ class _$SlotNotificationCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SlotNotification extends SlotNotification {
-  const _$SlotNotification({required this.params}) : super._();
+  const _$SlotNotification({required this.params, String? $type})
+      : $type = $type ?? 'slotNotification',
+        super._();
 
   factory _$SlotNotification.fromJson(Map<String, dynamic> json) =>
       _$$SlotNotificationFromJson(json);
 
   @override
   final NotificationParams<Slot> params;
+
+  @JsonKey(name: 'method')
+  final String $type;
 
   @override
   String toString() {
@@ -1082,11 +1113,12 @@ class _$SlotNotification extends SlotNotification {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SlotNotification &&
-            (identical(other.params, params) || other.params == params));
+            const DeepCollectionEquality().equals(other.params, params));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, params);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(params));
 
   @JsonKey(ignore: true)
   @override
@@ -1187,7 +1219,7 @@ class _$SlotNotification extends SlotNotification {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SlotNotificationToJson(this)..['method'] = 'slotNotification';
+    return _$$SlotNotificationToJson(this);
   }
 }
 

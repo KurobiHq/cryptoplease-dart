@@ -1,15 +1,14 @@
-import 'package:solana/solana.dart';
+import 'package:solana/src/crypto/ed25519_hd_public_key.dart';
 import 'package:solana/src/encoder/account_meta.dart';
 import 'package:solana/src/encoder/buffer.dart';
 import 'package:solana/src/encoder/instruction.dart';
 
 extension AccountMetaListExt on List<AccountMeta> {
   // Convert account metas to encoder public keys
-  Iterable<Buffer> toSerializablePubKeys() =>
-      map((a) => Buffer.fromBase58(a.pubKey));
+  Iterable<Buffer> toSerializablePubKeys() => map((a) => a.pubKey.toBuffer());
 
-  Map<String, int> toIndexesMap() {
-    final Map<String, int> mapped = {};
+  Map<Ed25519HDPublicKey, int> toIndexesMap() {
+    final Map<Ed25519HDPublicKey, int> mapped = {};
 
     for (int i = 0; i < length; ++i) {
       final AccountMeta item = elementAt(i);
@@ -37,7 +36,7 @@ extension AccountMetaListExt on List<AccountMeta> {
       });
 
   /// Find an account with a matching [pubKey].
-  int indexOfPubKey(String pubKey) =>
+  int indexOfPubKey(Ed25519HDPublicKey pubKey) =>
       toList(growable: false).indexWhere((account) => account.pubKey == pubKey);
 
   /// Counts the number of accounts that are signers.
@@ -69,31 +68,37 @@ extension InstructionListExt on List<Instruction> {
   /// - sorts accounts according to [Account Addresses Format][1].
   ///
   /// [1]: https://docs.solana.com/developing/programming-model/transactions#account-addresses-format
-  List<AccountMeta> getAccountsWithOptionalFeePayer(
-    Ed25519HDKeyPair feePayer,
-  ) {
+  List<AccountMeta> getAccountsWithOptionalFeePayer({
+    Ed25519HDPublicKey? feePayer,
+  }) {
     final accounts = expand<AccountMeta>(
       (Instruction instruction) => [
         ...instruction.accounts,
 
         /// Append the instruction program id
-        AccountMeta.readonly(pubKey: instruction.programId, isSigner: false),
+        AccountMeta.readonly(
+          pubKey: instruction.programId,
+          isSigner: false,
+        ),
       ],
     ).toList();
-    final index = accounts.indexWhere(
-      (AccountMeta account) => account.pubKey == feePayer.address,
-    );
-    if (index != -1) {
-      // If the account is already here, remove it as we are going
-      // to put it as the first element of the accounts array anyway
-      accounts.removeAt(index);
+    if (feePayer != null) {
+      final index = accounts.indexWhere(
+        (AccountMeta account) => account.pubKey == feePayer,
+      );
+      if (index != -1) {
+        // If the account is already here, remove it as we are going
+        // to put it as the first element of the accounts array anyway
+        accounts.removeAt(index);
+      }
+      // The fee payer must be the first account in they "keys" provided with
+      // the message object
+      accounts.insert(
+        0,
+        AccountMeta.writeable(pubKey: feePayer, isSigner: true),
+      );
     }
-    // The fee payer must be the first account in they "keys" provided with
-    // the message object
-    accounts.insert(
-      0,
-      AccountMeta.writeable(pubKey: feePayer.address, isSigner: true),
-    );
+
     return accounts.unique()..sort();
   }
 }

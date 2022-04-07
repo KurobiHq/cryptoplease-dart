@@ -1,3 +1,127 @@
+## 0.22.0-dev.3
+
+ - **FEAT**: Add Solana Pay support (#232).
+
+## 0.22.0-dev.2
+
+ - **REFACTOR**: Restructure SolanaClient (#230).
+
+## 0.22.0-dev.1
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**: Update tokens and client (#228).
+
+## 0.22.0-dev.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: Add delgate stake to the stake program (#173).
+ - **FEAT**: Add app packages (#196).
+ - **DOCS**: Fix twitter link.
+ - **DOCS**: Add badges.
+ - **BREAKING** **REFACTOR**: Update parameters names in instructions (#227).
+ - **BREAKING** **REFACTOR**: Update types (#226).
+
+## 0.21.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: Make ClusterNode fields nullable (#192).
+ - **FIX**: Remove mintAuthority from initializeMint (#190).
+ - **BREAKING** **FIX**: Metadata decoding (#194).
+
+## 0.20.0+1
+
+ - **DOCS**: Add discord link.
+
+## 0.20.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: Use BigInt for curve25519 (#181).
+ - **DOCS**: Update readme (#172).
+ - **BREAKING** **FIX**: Remove unused exceptions (#182).
+
+## 0.19.0+1
+
+ - **FIX**: Fix stake instruction parameter (#179).
+
+## 0.19.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **CHORE**: Update dependencies (#178).
+
+## 0.18.0
+
+> Note: This release has breaking changes.
+
+ - **REFACTOR**: Put associated token account program into programs directory (#164).
+ - **FEAT**: Add metaplex parsing support (#163).
+ - **FEAT**: Add the ability to request all transactions in 1 request (#167).
+ - **BREAKING** **REFACTOR**: Re-organize exports (#168).
+ - **BREAKING** **FEAT**: Use String feePayer instead of Keypair (#122).
+
+## 0.17.2+2
+
+ - **FIX**: Check for connection before sending request (#166).
+
+## 0.17.2+1
+
+ - **FIX**: Close subscription clients after using them (#165).
+
+## 0.17.2
+
+ - **FIX**: Remove mint and authority from spl transfer info (#160).
+ - **FIX**: isValidAddress should not throw (#158).
+ - **FEAT**: Add timeout to waitForSignatureStatus (#161).
+
+## 0.17.1
+
+ - **FIX**: Add initialized account to StakeAccountData union (#151).
+ - **FEAT**: Add rpc client timeout (#157).
+ - **FEAT**: Stake program instructions (#149).
+ - **FEAT**: SPL Token program instructions (#142).
+
+## 0.17.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: Add SolanaClient (#144).
+
+## 0.16.0
+
+> Note: This release has breaking changes.
+
+ - **REFACTOR**: Create programs directory to keep all programs (#140).
+ - **FEAT**: System program instructions (#127).
+ - **BREAKING** **REFACTOR**: Update Wallet (#143).
+
+## 0.15.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**: Update SubscriptionClient (#133).
+
+## 0.14.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: Export optional error object (#132).
+ - **FIX**: Program account data filter serialization (#125).
+ - **CHORE**: Upgrade to newest dart version (#126).
+ - **BREAKING** **FIX**: Add missing imports and fix program accounts filter (#131).
+ - **BREAKING** **FEAT**: Complete RPC client implementation using a generator (#118).
+
+## 0.13.3+1
+
+ - **FIX**: Add missing `mint` value to the SPL tokens transfer info (#108).
+
+## 0.13.3
+
+ - **FEAT**: Export `base58encode` (#106).
+
 ## 0.13.2
 
  - **REFACTOR**: Update the polling timeout for `waitForSignatureStatus()` (#101).

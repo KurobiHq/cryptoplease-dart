@@ -48,6 +48,7 @@ class Buffer extends ByteArray {
       default:
         throw FormatException('invalid bit size $bitSize');
     }
+
     return Buffer._(Uint8List.view(data.buffer));
   }
 
@@ -69,13 +70,19 @@ class Buffer extends ByteArray {
   factory Buffer.fromInt64(int value) =>
       Buffer._fromIntWithBitSize(value, bitSize: 64);
 
-  Buffer.fromString(String string) : _data = utf8.encode(string);
+  Buffer.fromString(String string)
+      : _data = Buffer.fromConcatenatedByteArrays([
+          Buffer.fromUint64(string.length),
+          utf8.encode(string),
+        ]);
 
   Buffer.fromConcatenatedByteArrays(Iterable<ByteArray> byteArrays)
       : _data = byteArrays.fold(
           [],
           (concatenated, buffer) => concatenated.followedBy(buffer),
         );
+
+  Buffer.fromIterable(Iterable<int> data) : _data = data;
 
   Buffer.fromBase58(String base58String) : _data = base58decode(base58String);
 
