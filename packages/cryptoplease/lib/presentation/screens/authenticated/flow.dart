@@ -7,16 +7,22 @@ import 'package:cryptoplease/bl/conversion_rates/conversion_rates_bloc.dart';
 import 'package:cryptoplease/bl/conversion_rates/repository.dart';
 import 'package:cryptoplease/bl/nft/nft_collection/bloc.dart';
 import 'package:cryptoplease/bl/outgoing_transfers/outgoing_transfers_bloc/bloc.dart';
+import 'package:cryptoplease/bl/outgoing_transfers/pending_request_bloc/pending_request_bloc.dart';
 import 'package:cryptoplease/bl/outgoing_transfers/repository.dart';
 import 'package:cryptoplease/bl/puzzle_reminder/puzzle_reminder_bloc.dart';
+import 'package:cryptoplease/bl/solana_helpers.dart';
+import 'package:cryptoplease/bl/tokens/token_list.dart';
 import 'package:cryptoplease/bl/user_preferences.dart';
 import 'package:cryptoplease/presentation/routes.dart';
+import 'package:cryptoplease/presentation/screens/authenticated/outgoing_transfer_flow/outgoing_transfer_flow.dart';
+import 'package:cryptoplease/presentation/screens/authenticated/send_flow/fungible_token/send_flow.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
 import 'package:solana/solana.dart';
+import 'package:solana/solana_pay.dart';
 
 class AuthenticatedFlowScreen extends StatefulWidget {
   const AuthenticatedFlowScreen({Key? key}) : super(key: key);
@@ -70,6 +76,7 @@ class _AuthenticatedFlowScreenState extends State<AuthenticatedFlowScreen> {
                       }
                     },
                   ),
+                  _PendingRequestListener(routerKey: _homeRouterKey),
                   _balanceListener,
                 ],
                 child: AutoRouter(key: _homeRouterKey),
@@ -132,3 +139,63 @@ final _balanceListener = BlocListener<BalancesBloc, BalancesState>(
     current.userTokens,
   ),
 );
+
+/// {@template _PendingRequestListener}
+/// Listens for the Solana Pay request from the deep link and launches the
+/// corresponding flow.
+/// {@endtemplate}
+class _PendingRequestListener extends SingleChildStatefulWidget {
+  /// {@macro _PendingRequestListener}
+  const _PendingRequestListener({
+    Key? key,
+    Widget? child,
+    required this.routerKey,
+  }) : super(key: key, child: child);
+
+  final GlobalKey<AutoRouterState> routerKey;
+
+  @override
+  State<_PendingRequestListener> createState() =>
+      _PendingRequestListenerState();
+}
+
+class _PendingRequestListenerState
+    extends SingleChildState<_PendingRequestListener> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _checkForPendingRequest(context.read<PendingRequestBloc>().state.request);
+    });
+  }
+
+  void _checkForPendingRequest(SolanaPayRequest? request) {
+    if (request == null) return;
+
+    final token = request.token(TokenList());
+    if (token == null) return;
+
+    context.navigateToDirectTransferFt(
+      onTransferCreated: (id) => context.navigateToOutgoingTransfer(
+        id,
+        routerKey: widget.routerKey,
+      ),
+      initialAddress: request.recipient.toBase58(),
+      token: token,
+      amount: request.amount,
+      memo: request.memo,
+      reference: request.reference,
+    );
+    context
+        .read<PendingRequestBloc>()
+        .add(const PendingRequestEvent.consumed());
+  }
+
+  @override
+  Widget buildWithChild(BuildContext context, Widget? child) =>
+      BlocListener<PendingRequestBloc, PendingRequestState>(
+        listener: (context, state) => _checkForPendingRequest(state.request),
+        listenWhen: (s1, s2) => s1.request != s2.request,
+        child: child,
+      );
+}
