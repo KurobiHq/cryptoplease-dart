@@ -25,7 +25,7 @@ bool isPointOnEd25519Curve(Iterable<int> data) {
   }
   try {
     final compressed = CompressedEdwardsY(
-      data.map(toBigInt).toList(),
+      data.map(BigInt.from).toList(),
     );
     final point = compressed.decompress();
 
