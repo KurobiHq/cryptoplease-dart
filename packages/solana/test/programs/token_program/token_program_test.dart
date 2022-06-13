@@ -26,11 +26,12 @@ void main() {
     final signature = await rpcClient.requestAirdrop(
       mintAuthority.address,
       10 * lamportsPerSol,
+      commitment: Commitment.confirmed,
     );
 
     await subscriptionClient.waitForSignatureStatus(
       signature,
-      status: ConfirmationStatus.finalized,
+      status: ConfirmationStatus.confirmed,
     );
   });
 
@@ -38,10 +39,14 @@ void main() {
     Message message,
     List<Ed25519HDKeyPair> signers,
   ) async {
-    final signature = await rpcClient.signAndSendTransaction(message, signers);
+    final signature = await rpcClient.signAndSendTransaction(
+      message,
+      signers,
+      commitment: Commitment.confirmed,
+    );
     await subscriptionClient.waitForSignatureStatus(
       signature,
-      status: ConfirmationStatus.finalized,
+      status: ConfirmationStatus.confirmed,
     );
   }
 
@@ -64,9 +69,8 @@ void main() {
   });
 
   test('Create Account', () async {
-    final rent = await rpcClient.getMinimumBalanceForRentExemption(
-      TokenProgram.neededAccountSpace,
-    );
+    final rent = await rpcClient
+        .getMinimumBalanceForRentExemption(TokenProgram.neededAccountSpace);
     final instructions = TokenInstruction.createAndInitializeAccount(
       mint: mint.publicKey,
       address: tokensHolder.publicKey,

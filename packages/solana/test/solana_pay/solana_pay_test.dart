@@ -24,12 +24,14 @@ void main() {
       await client.requestAirdrop(
         address: recipient.publicKey,
         lamports: lamportsPerSol,
+        commitment: Commitment.confirmed,
       );
 
       // Airdrop some SOL to the sender.
       await client.requestAirdrop(
         address: sender.publicKey,
         lamports: lamportsPerSol,
+        commitment: Commitment.confirmed,
       );
 
       final reference = (await Ed25519HDKeyPair.random()).publicKey;
@@ -45,6 +47,7 @@ void main() {
       final expectedTransactionId = await client.sendSolanaPay(
         payer: sender,
         recipient: request.recipient,
+        // ignore: avoid-non-null-assertion, cannot be null here
         amount: request.amount!,
         reference: request.reference,
         memo: request.memo,
@@ -58,8 +61,10 @@ void main() {
       expect(found, expectedTransactionId);
 
       await client.validateSolanaPayTransaction(
+        // ignore: avoid-non-null-assertion, cannot be null here
         signature: found!,
         recipient: recipient.publicKey,
+        // ignore: avoid-non-null-assertion, cannot be null here
         amount: request.amount!,
         commitment: Commitment.confirmed,
       );

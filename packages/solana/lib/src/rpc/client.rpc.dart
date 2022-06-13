@@ -735,7 +735,7 @@ class _RpcClient implements RpcClient {
   }
 
   @override
-  Future<List<ProgramAccount>> getTokenLargestAccounts(String pubKey,
+  Future<List<TokenLargestAccount>> getTokenLargestAccounts(String pubKey,
       {Commitment? commitment}) async {
     final config =
         GetTokenLargestAccountsConfig(commitment: commitment).toJson();
@@ -749,7 +749,7 @@ class _RpcClient implements RpcClient {
     final dynamic value = unwrapAndGetResult(response);
 
     return fromJsonArray(value,
-        (dynamic v) => ProgramAccount.fromJson(v as Map<String, dynamic>));
+        (dynamic v) => TokenLargestAccount.fromJson(v as Map<String, dynamic>));
   }
 
   @override
@@ -874,12 +874,12 @@ class _RpcClient implements RpcClient {
   @override
   Future<String> sendTransaction(String transaction,
       {Encoding encoding = Encoding.base64,
-      Commitment? commitment = Commitment.finalized,
+      Commitment? preflightCommitment = Commitment.finalized,
       bool? skipPreflight = false,
       int? maxRetries}) async {
     final config = SendTransactionConfig(
             encoding: encoding,
-            commitment: commitment,
+            preflightCommitment: preflightCommitment,
             skipPreflight: skipPreflight,
             maxRetries: maxRetries)
         .toJson();
@@ -1474,13 +1474,13 @@ class RequestAirdropConfig {
 class SendTransactionConfig {
   SendTransactionConfig({
     this.encoding = Encoding.base64,
-    this.commitment = Commitment.finalized,
+    this.preflightCommitment = Commitment.finalized,
     this.skipPreflight = false,
     this.maxRetries,
   });
 
   final Encoding encoding;
-  final Commitment? commitment;
+  final Commitment? preflightCommitment;
   final bool? skipPreflight;
   final int? maxRetries;
 

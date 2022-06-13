@@ -1,7 +1,9 @@
-import 'package:solana/src/common/byte_array.dart';
+import 'package:solana/src/encoder/byte_array.dart';
 
-class CompactU16 extends ByteArray {
+class CompactU16 {
   factory CompactU16(int value) {
+    if (value == 0) return zero;
+
     final List<int> data = List<int>.empty(growable: true);
     int rawValue = value;
     while (rawValue != 0) {
@@ -14,14 +16,30 @@ class CompactU16 extends ByteArray {
       }
     }
 
-    return CompactU16._(data);
+    return CompactU16.raw(data);
   }
 
-  const CompactU16._(this._data);
-  static const zero = CompactU16._([0]);
+  const CompactU16.raw(this._data);
 
-  final ByteArray _data;
+  static const zero = CompactU16.raw([0]);
 
-  @override
-  Iterator<int> get iterator => _data.iterator;
+  final List<int> _data;
+
+  int get value {
+    var len = 0;
+    var size = 0;
+    for (final elem in _data) {
+      len |= (elem & 0x7f) << (size * 7);
+      size += 1;
+      if ((elem & 0x80) == 0) {
+        break;
+      }
+    }
+
+    return len;
+  }
+
+  int get size => toByteArray().length;
+
+  ByteArray toByteArray() => ByteArray(CompactU16(value)._data);
 }

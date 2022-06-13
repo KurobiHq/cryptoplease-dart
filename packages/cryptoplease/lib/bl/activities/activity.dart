@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:cryptoplease/bl/outgoing_transfers/outgoing_payment.dart';
 import 'package:cryptoplease/bl/outgoing_transfers/repository.dart';
 import 'package:cryptoplease/bl/payment_requests/repository.dart';
@@ -59,6 +60,7 @@ Stream<IList<Activity>> watchActivities({
     outgoing,
     (Iterable<Activity> i, Iterable<Activity> p, Iterable<Activity> o) => [
       ...i,
+      // ignore: avoid-non-null-assertion, outgoing payments and requests should have created field
       ...IList([...p, ...o]).sortedBy((e) => e.created!).reversed,
     ].toIList(),
   );

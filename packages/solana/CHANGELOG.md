@@ -1,3 +1,52 @@
+## 0.25.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: add `encoding` to `accountSubscribe` (#286).
+ - **FEAT**: Add method name to RpcTimeoutException (#288).
+ - **FEAT**: improve timeout message with more data provided (#285).
+ - **BREAKING** **FIX**: Fix commitments (#287).
+
+## 0.24.0+1
+
+ - Update a dependency to the latest release.
+
+## 0.24.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**: Bump freezed_annotation to 2.0.0.
+
+## 0.23.1
+
+ - **REFACTOR**: Migrate to Dart 2.17 (#271).
+ - **FEAT**: Add Message.decompile (#275).
+
+## 0.23.0+1
+
+ - **REFACTOR**: Remove unused code.
+ - **FIX**: getTokenLargestAccounts response (#270).
+
+## 0.23.0
+
+> Note: This release has breaking changes.
+
+ - **REFACTOR**: Bump mews_pedantic.
+ - **FIX**: Make Meta innerInstructions and logMessages nullable (#257).
+ - **BREAKING** **FIX**: Buffer to ByteArray (#266).
+ - **BREAKING** **FEAT**: Add CompiledMessage.fromSignedTransaction (#256).
+
+## 0.22.0
+
+ - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.
+
+## 0.22.0-dev.4
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: Update Solana pay support (#235).
+ - **BREAKING** **REFACTOR**: borsh 0.3.0.
+
 ## 0.22.0-dev.3
 
  - **FEAT**: Add Solana Pay support (#232).

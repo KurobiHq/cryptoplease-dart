@@ -1,4 +1,5 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:collection/collection.dart';
 import 'package:cryptoplease/bl/balances/balances_bloc.dart';
 import 'package:cryptoplease/bl/processing_state.dart';
 import 'package:cryptoplease/bl/solana_helpers.dart';
@@ -214,8 +215,8 @@ Future<Wallet> walletFromParts({
   required String firstPart,
   required String secondPart,
 }) async {
-  final keyPart1 = Buffer.fromBase58(firstPart).toList();
-  final keyPart2 = Buffer.fromBase58(secondPart).toList();
+  final keyPart1 = ByteArray.fromBase58(firstPart).toList();
+  final keyPart2 = ByteArray.fromBase58(secondPart).toList();
 
   return Wallet.fromPrivateKeyBytes(privateKey: keyPart1 + keyPart2);
 }
