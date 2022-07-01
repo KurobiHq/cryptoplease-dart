@@ -7,7 +7,7 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
-  auto_route: ^3.2.1
+  auto_route: ^4.2.0
   bip39: ^1.0.6
   bloc_concurrency: ^0.2.0
   cached_network_image: ^3.1.0
@@ -42,7 +42,7 @@ dependencies:
   mews_pedantic: ^0.6.0
   nested: ^1.0.0
   package_info_plus: ^1.3.0
-  path: ^1.8.0
+  path: ^1.8.1
   path_provider: ^2.0.2
   provider: ^6.0.0
   qr_code_scanner:
@@ -63,7 +63,7 @@ dependencies:
   uuid: ^3.0.4
 
 dev_dependencies:
-  auto_route_generator: ^3.2.0
+  auto_route_generator: ^4.0.0
   bloc_test: ^9.0.3
   build_runner: ^2.0.6
   drift_dev: ^1.5.2
